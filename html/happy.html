@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;600;700&display=swap');
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Poppins,sans-serif;
+  background:radial-gradient(ellipse at top,#681b43,#190715 75%);
+  color:#fff;text-align:center;overflow-x:hidden;min-width:0
+}
+button{font:inherit;cursor:pointer;border:0;transition:transform .2s,filter .2s}
+button:hover{transform:scale(1.04);filter:brightness(1.08)}
+nav{
+  position:sticky;top:0;z-index:10;display:flex;
+  justify-content:center;flex-wrap:wrap;gap:8px;
+  padding:12px 8px;background:#200817ef;
+  backdrop-filter:blur(10px);border-bottom:1px solid #ff729b55
+}
+nav a{color:#ffd9e6;text-decoration:none;font-size:13px;padding:7px 10px}
+.hero{
+  min-height:78vh;padding:60px 18px 40px;display:flex;
+  align-items:center;justify-content:center;flex-direction:column
+}
+.eyebrow{color:#ffc1d6;letter-spacing:3px;font-size:12px;text-transform:uppercase}
+h1,h2,.script{font-family:'Dancing Script',cursive}
+h1{font-size:clamp(38px,9vw,82px);color:#ffabc8;text-shadow:0 0 25px #ff477e77;margin:15px 0}
+h2{font-size:clamp(32px,6vw,48px);color:#ffabc8;margin-top:0}
+.hero p{max-width:570px;line-height:1.9;color:#ffe1ec}
+.btn{
+  background:linear-gradient(100deg,#ff477e,#ff91b8);color:white;
+  padding:13px 22px;border-radius:35px;box-shadow:0 0 25px #ff477e55;margin:8px
+}
+.secondary{background:#ffffff12;border:1px solid #ff9fbd}
+section{width:min(1000px,92%);margin:0 auto;padding:45px 0;scroll-margin-top:65px}
+.panel{
+  background:#ffffff0b;border:1px solid #ff9fbd55;border-radius:25px;
+  padding:clamp(18px,5vw,40px);box-shadow:0 10px 40px #00000022;
+  min-width:0
+}
+.small-text{font-size:13px;color:#e9bfd0;line-height:1.8;overflow-wrap:anywhere}
+.heart{position:fixed;top:110vh;z-index:1;pointer-events:none;animation:floatUp linear forwards}
+@keyframes floatUp{to{transform:translateY(-125vh) rotate(35deg);opacity:0}}
+#cake{width:240px;height:225px;max-width:100%;margin:15px auto;position:relative;cursor:pointer;user-select:none}
+.plate{
+  position:absolute;width:100%;height:18px;bottom:14px;left:0;
+  background:#ffd8e4;border-radius:50%
+}
+.cake-layer{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:190px;height:58px;border-radius:12px 12px 17px 17px;
+  background:linear-gradient(#ff9bb8 0 18%,#ffe1e9 18% 32%,#df527c 32%);
+  box-shadow:inset 0 -7px #b72e59
+}
+.layer-bottom{bottom:28px}
+.layer-top{bottom:79px;width:150px;height:55px}
+.icing{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:121px;
+  width:150px;height:20px;border-radius:50%;background:#fff0f5
+}
+.candle{
+  position:absolute;bottom:137px;left:50%;width:9px;height:38px;
+  transform:translateX(-50%);
+  background:repeating-linear-gradient(45deg,white 0 5px,#ff6f9f 5px 10px);
+  border-radius:3px
+}
+.flame{
+  position:absolute;top:-18px;left:-2px;width:13px;height:17px;
+  background:#ffda70;border-radius:50% 50% 50% 0;
+  transform:rotate(-45deg);box-shadow:0 0 15px #ffbd55;
+  animation:flicker .5s infinite alternate
+}
+@keyframes flicker{to{transform:rotate(-40deg) scale(.8)}}
+#cake.blown .flame{display:none}
+.cake-hint{color:#ffc1d6;font-size:14px}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:25px}
+.photo{border-radius:15px;overflow:hidden;background:#6d2748;border:1px solid #ff9fbd55;min-width:0}
+.photo img{display:block;width:100%;height:220px;object-fit:cover}
+.caption{padding:10px;font-family:'Dancing Script',cursive;font-size:22px;color:#ffe1ec}
+.photo input{width:100%;max-width:100%;padding:8px;color:white;font-size:11px}
+.letter{line-height:2;white-space:pre-line;color:#ffe4ed;text-align:left;font-size:15px;overflow-wrap:anywhere}
+.signature{font-family:'Dancing Script',cursive;font-size:31px;text-align:right;color:#ff9fbd}
+.hidden{display:none}
+#sky{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:20}
+footer{padding:40px 15px;color:#ffc1d6;font-size:13px}
+#musicGate{
+  position:fixed;inset:0;z-index:100;
+  background:linear-gradient(145deg,#3a0926f5,#160511f7);
+  display:flex;align-items:center;justify-content:center;padding:18px
+}
+.gate-card{
+  max-width:450px;width:100%;padding:30px 22px;
+  border:1px solid #ff9fbd99;border-radius:25px;
+  background:#ffffff0c;box-shadow:0 0 50px #ff477e33
+}
+#musicGate h2{margin-bottom:8px}
+#musicGate p{color:#ffe1ec;line-height:1.8;font-size:14px}
+.gate-heart{font-size:58px;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+img,canvas{max-width:100%}
+button{max-width:100%;white-space:normal}
+
+@media(max-width:768px){
+  .hero{min-height:auto;padding:60px 16px 42px}
+  section{width:calc(100% - 24px);padding:28px 0}
+  .panel{padding:22px 16px}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .photo img{height:clamp(125px,34vw,200px)}
+  .caption{font-size:19px}
+  .btn{padding:12px 18px}
+  nav{gap:3px;padding:9px 4px}
+  nav a{font-size:12px;padding:7px 8px}
+  .gate-card{padding:26px 18px}
+}
+@media(max-width:420px){
+  h1{font-size:clamp(36px,11vw,48px)}
+  h2{font-size:33px}
+  .eyebrow{letter-spacing:1px;font-size:10px}
+  .hero p{font-size:14px}
+  .gallery{grid-template-columns:1fr 1fr}
+  .photo img{height:135px}
+  .photo input{font-size:10px;padding:6px 2px}
+  #cake{transform:scale(.9);transform-origin:top center;margin-bottom:-5px}
+  .letter{font-size:14px;line-height:1.8}
+  nav a{font-size:10px;padding:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important
+  }
+}
+</style>
+</head>
+
+<body>
+<canvas id="sky"></canvas>
+
+<!-- Romantic welcome screen -->
+<div id="musicGate">
+  <div class="gate-card">
+    <div class="gate-heart"></div>
+    <h2>A Little Surprise for You</h2>
+    
+    <button class="btn" id="enterButton">Open Your Birthday Surprise 💌</button>
+    <p id="musicStatus" class="small-text">Trying to play your song automatically…</p>
+    <p class="small-text">Turn up your volume for the full experience ♡</p>
+  </div>
+</div>
+
+<nav>
+  <a href="#home"> Home</a>
+  <a href="#cake-section"> Cake</a>
+  <a href="#memories"> Memories</a>
+  <a href="#letter-section">Love Letter</a>
+</nav>
+
+<header class="hero" id="home">
+  <div class="eyebrow"</div>
+  <h1>Happy Birthday,<br><span id="heroName">Martin</span> ❤️</h1>
+  <p></p>
+  <button class="btn" onclick="startCelebration()">✨ Start the Celebration</button>
+  <button class="btn secondary" onclick="toggleMusic()">🎵 Play / Pause Our Song</button>
+ <center> <p class="small-text">Scroll down for your special surprises </p></center>
+</header>
+
+<section id="cake-section">
+  <div class="panel">
+    <h2>Make a Birthday Wish 🎂</h2>
+    <p>Close your eyes, make a wish, and tap the cake!</p>
+    <div id="cake" role="button" tabindex="0" aria-label="Tap cake to blow out the candles">
+      <div class="plate"></div>
+      <div class="cake-layer layer-bottom"></div>
+      <div class="cake-layer layer-top"></div>
+      <div class="icing"></div>
+      <div class="candle"><div class="flame"></div></div>
+    </div>
+    <p id="cakeMessage" class="cake-hint">🕯️ Tap the cake to blow out the candles!</p>
+    <button class="btn" onclick="relightCake()">🕯️ Light Candles Again</button>
+  </div>
+</section>
+
+<section id="memories">
+  <div class="panel">
+    <h2>Our Little Memories </h2>
+    
+    <div class="gallery">
+      <div class="photo">
+        <img alt="Memory one" src="Screenshot_20251204-200045_1.png">
+        <div class="caption">favorite memory </div>
+        
+      </div>
+      <div class="photo">
+        <img alt="Memory two" src="IMG_20260130_160402_385.jpg">
+        <div class="caption">You and me </div>
+       
+      </div>
+      <div class="photo">
+        <img alt="Memory three" src="Messenger_creation_3157EF0B-4446-493F-8861-611EB5587D23.jpeg">
+        <div class="caption">A moment to remember </div>
+        
+      </div>
+    </div>
+    
+</section>
+
+<section id="letter-section">
+  <div class="panel">
+    <div style="font-size:40px"></div>
+    <h2>A Letter for You</h2>
+    <button class="btn" id="letterButton" onclick="openLetter()">Open</button>
+    <div id="letterContent" class="hidden">
+      <div class="letter" id="letterText"></div>
+      <div class="signature">With all my support,<br><span id="senderName">Person</span> </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="panel">
+    <h2>One Last Surprise ✨</h2>
+    <p>You make ordinary days feel special. Today, I hope you feel just how appreciated, treasured, and loved you are.</p>
+    <button class="btn" onclick="fireworks(7)">🎆 Make a Wish!</button>
+    <p class="script" style="font-size:30px;color:#ffabc8">More memories, more laughter, more love. ♡</p>
+  </div>
+</section>
+
+<span id="footerName"></span></footer>
+
+<!-- Put birthday-song.mp3 in the same folder as this HTML file -->
+<audio id="music" src="Arctic Monkeys - No. 1 Party Anthem (Instrumental).mp3" loop preload="auto" playsinline></audio>
+
+<script>
+// PERSONALIZE THESE DETAILS
+const CONFIG = {
+  recipient: "Martin",
+  sender: "jelllyyyyy",
+  letter: `Happy birthday
+
+HAPPY 18TH BIRTHDAY, MARTIN!
+
+First of all, happy 18th birthday, Martin! Today is a very special day because you're finally turning 18. This is another milestone in your life, and I hope you take the time to appreciate how far you've come and everything you've experienced to reach this point. Eighteen years of life, eighteen years of learning, growing, making memories, facing challenges, and discovering different things about yourself. It's amazing to think about how much can happen in someone's life within those years. Now, you're entering another chapter, one that will bring new experiences, opportunities, responsibilities, and lessons that will help shape the person you're becoming.
+
+I honestly don't know where to begin because there are so many things I want to wish for you as you celebrate this day. But above everything else, I hope you find genuine happiness in whatever you do. I hope you wake up every day with something to look forward to, even if it's just the simplest things. I hope you have more reasons to smile, more opportunities to grow, and more moments that remind you that life is worth appreciating. You deserve to experience good things, and I hope this year gives you plenty of reasons to be grateful.
+
+Turning 18 is often described as the beginning of adulthood. People will start expecting more from you, and you might notice that certain things become different as you grow older. There will be more decisions to make, responsibilities to handle, and situations that will require you to think carefully before acting. However, I want you to remember that turning 18 doesn't mean you suddenly need to have everything figured out. You don't have to know exactly what you want to become, where you want to go, or how your entire future will look. You're still learning, and that's completely okay. Give yourself enough time to understand life and discover what truly matters to you.
+
+I hope you never feel pressured to rush your growth just because you're getting older. Sometimes, we become so focused on what we want to achieve that we forget to appreciate the process of getting there. We look at other people's achievements and start questioning our own progress. We wonder whether we're doing enough or whether we're falling behind. But Martin, I hope you remember that life isn't a competition. Everyone has their own pace, their own struggles, and their own definition of success. You don't need to follow someone else's timeline just to prove that you're doing well. Focus on your own journey and trust that your efforts will eventually lead you somewhere meaningful.
+
+As you enter this new chapter, I hope you become more confident in yourself. Learn to trust your decisions, recognize your abilities, and understand that you are capable of doing more than you sometimes think. There will be situations when you'll doubt yourself, especially when things don't go according to plan. There will be moments when you feel uncertain about your choices or question whether you're making the right decisions. During those times, don't immediately assume that you're failing. Sometimes, uncertainty is simply part of growing up. Take a step back, think about your options, learn from the situation, and continue moving forward.
+
+I also hope you continue working hard for your dreams. Whatever goals you have in mind, I hope you never stop finding ways to achieve them. I know that building a future isn't always easy. It requires patience, discipline, consistency, and sometimes sacrifices. There will be days when you feel motivated, and there will also be days when you don't feel like doing anything. That's normal. What matters is that you learn how to keep going even when things become difficult. You don't have to accomplish everything in one day. Small efforts, when done consistently, can eventually bring you closer to the things you've always wanted.
+
+When it comes to your studies and future career, I hope you continue giving your best. I hope you discover more opportunities that will help you improve your skills and develop your potential. Don't be afraid to explore different interests or consider paths that you haven't thought about before. Sometimes, the opportunities we never expected become the experiences that teach us the most. Be open to learning, ask questions when you don't understand something, and never think that you're less capable simply because you still have things to improve.
+
+Remember that education is important, but learning doesn't stop inside the classroom. Some of the most valuable lessons will come from your experiences, the people you meet, the decisions you make, and the challenges you encounter. You will learn things that no textbook can fully explain. You'll discover how to manage your time, communicate with different people, handle responsibilities, and make decisions independently. I hope you take every experience as an opportunity to become wiser and more prepared for whatever comes next.
+
+Another thing I want to remind you of is to take care of yourself. I know that life can become busy, especially when you're trying to balance different responsibilities and personal goals. Sometimes, you might become too focused on accomplishing something that you forget to give yourself enough time to rest. Please don't make that a habit. Your health and well-being matter just as much as your achievements. Get enough sleep, eat properly, take breaks when necessary, and don't ignore yourself just because you have other things to accomplish. You don't always need to be busy to feel productive. Sometimes, taking a moment to rest is also part of moving forward.
+
+I hope you learn how to handle your emotions and understand yourself better as you grow older. There will be days when you feel frustrated, disappointed, confused, or overwhelmed. Not every situation will be easy to explain, and not every problem will have an immediate solution. But I hope you learn to give yourself time to process things instead of keeping everything inside. It's okay to acknowledge when something bothers you. It's okay to admit when you're tired. It's okay to ask someone for advice when you don't know what to do. You don't have to handle every situation alone, and asking for help doesn't make you any less capable.
+
+I also hope you become more patient with yourself and with the people around you. Everyone makes mistakes, including you and me. There will be misunderstandings, disagreements, and moments when people fail to understand each other. What matters is how you respond to those situations. Learn to listen before reacting, understand different perspectives, and recognize when you need to apologize. Being mature doesn't mean always being right. Sometimes, maturity means knowing when to admit that you made a mistake and being willing to make things better.
+
+As you grow older, I hope you also learn the importance of choosing the right people to keep in your life. Surround yourself with people who respect you, support your growth, and encourage you to become better. Spend time with people who make you feel comfortable being yourself. Appreciate those who stay during difficult situations, not only those who are present when everything is going well. At the same time, learn that not everyone you meet will stay forever. Some people will become part of your memories, while others will remain in your life for a long time. Whatever happens, take the lessons from every connection and continue growing.
+
+I hope you never forget the people who helped you become who you are today. Remember the family members, friends, teachers, and other people who supported you along the way. Appreciate their efforts, even when they seem small. Sometimes, we become so focused on our own responsibilities that we forget to express gratitude to the people around us. A simple thank-you, a little time, or a sincere conversation can mean a lot. Never hesitate to appreciate people while you still have the opportunity.
+
+I also hope you continue enjoying your youth. Turning 18 doesn't mean you should stop having fun or enjoying the things that make you happy. There are still so many experiences waiting for you. Try new things, visit new places, learn new skills, meet different people, and create memories that you'll eventually look back on. Don't let the pressure of adulthood make you forget to enjoy the present. You can be responsible while still having fun. You can work hard for your future while appreciating the life you're living right now.
+
+Make sure you give yourself opportunities to experience things outside your usual routine. Sometimes, we become comfortable doing the same things every day because they're familiar. But there's a whole world of experiences waiting beyond what we already know. You might discover a new interest, develop a skill you never thought you had, or meet someone who will teach you something valuable. Don't be afraid to step outside your comfort zone when the opportunity is right. Not every new experience will be perfect, but each one can teach you something.
+
+Another thing I wish for you is financial wisdom and independence as you enter adulthood. Learn to manage what you have, understand the value of money, and become responsible with your decisions. You don't need to have everything immediately, and you don't need to spend just to keep up with other people. Learn how to save, plan ahead, and prioritize the things that truly matter. The habits you develop now can help you build a more stable future. Remember that success isn't only about how much you earn or what you own. It's also about knowing how to manage your resources and make decisions that will benefit you in the long run.
+
+I hope you also learn to stand up for yourself. There will be moments when you need to make decisions that other people might not understand. There will be times when you need to say no, establish boundaries, or choose something different from what others expect. Listen to advice, but don't let every opinion determine how you live your life. You are the one who will experience the consequences of your decisions, so make sure you think carefully and choose what you believe is right. Be respectful toward others, but don't forget to respect yourself, too.
+
+As someone who is part of your life, I want you to know that I appreciate the time, conversations, and experiences we share. I know that both of us have our own responsibilities, priorities, and things to work on. There will be busy days, tiring schedules, and moments when we might not have as much time as we want. But I hope we continue understanding each other and making an effort despite everything happening around us. I don't expect every day to be perfect because I know that's not how life works. What matters is that we continue learning, communicating, and appreciating the time we get to share.
+
+I hope you never feel that you need to pretend to be someone you're not just to meet other people's expectations. You don't need to hide your interests, opinions, or personality simply because someone might not understand them. Be yourself while remaining respectful and considerate. You don't have to impress everyone, and you don't need everyone's approval to feel confident about who you are. The right people will appreciate your character without requiring you to change everything about yourself.
+
+I hope you become someone who knows how to appreciate both success and failure. It's easy to celebrate when everything works out, but it can be difficult to remain positive when things don't go as expected. Still, I hope you understand that failure doesn't automatically mean the end of something. Sometimes, it simply means you need a different approach. Don't allow one bad experience to define your abilities or determine what you believe you can achieve. Learn what you can, make adjustments, and try again when you're ready.
+
+There might also be times when you feel like your efforts are unnoticed. You might work hard without receiving recognition, or you might do your best and still feel that the results aren't enough. When that happens, I hope you remember that your progress is still meaningful even when nobody sees it. Not every achievement needs to be announced, and not every effort needs to receive applause. Some of the most important improvements happen quietly. Be proud of the things you've accomplished, including the small victories that only you know about.
+
+Martin, I hope you also remember to enjoy the little moments. Take pictures, laugh at random things, spend time with your favorite people, and appreciate ordinary days. Sometimes, we don't realize how meaningful a particular moment is until it becomes a memory. One day, you might look back at the conversations, school experiences, random adventures, and simple celebrations you had when you were younger. I hope you create memories that will make you smile whenever you remember them.
+
+I wish you more opportunities to travel, explore, and experience different things. I hope you get to visit places you've always wanted to see and try activities you've never experienced before. I hope you meet people who will inspire you and learn from individuals whose experiences are different from yours. The more you experience life, the more perspectives you gain. Keep an open mind and never stop being curious about the world around you.
+
+I also hope you remain grounded no matter how much you achieve. When things start going well, remember where you started and appreciate the people who supported you. Success should never make you look down on others. Be confident in your accomplishments without becoming arrogant. Treat people with respect regardless of their position, background, or achievements. You never know what someone else is going through, so always try to be considerate.
+
+As the years pass, you will probably notice how much your priorities and perspectives change. The things that matter to you today might be different from the things you'll value in the future. That's part of growing. Allow yourself to change in ways that help you become better. Don't be afraid to outgrow old habits, reconsider your decisions, or choose a different direction when necessary. You are allowed to learn new things about yourself and build a life that reflects who you genuinely want to become.
+
+I hope you become more disciplined with your time and responsibilities. Learn to balance the things you need to do with the things you want to do. There will always be distractions, unexpected situations, and reasons to postpone certain tasks. But developing discipline will help you stay focused on your priorities. You don't have to be perfect with your schedule, but try to build habits that will make your everyday life easier. Be consistent, stay organized, and remember that the decisions you make today can influence the opportunities you have tomorrow.
+
+I wish you peace of mind, especially during the moments when life feels overwhelming. I hope you find people you can talk to without feeling judged. I hope you have places where you can feel comfortable and activities that help you relax. I hope you never become too occupied with your responsibilities that you forget to enjoy being alive. Your future is important, but so is your present. You deserve a life that includes both achievements and moments of peace.
+
+I also hope you continue to recognize the value of communication. Be honest about what you think and feel, especially with the people who matter to you. Don't expect everyone to understand things you never explain. If something bothers you, learn how to communicate it properly. If someone makes an effort for you, acknowledge it. If you make a mistake, take responsibility. Good communication can prevent unnecessary misunderstandings and help maintain meaningful connections.
+
+There are so many things I could wish for you, but I think the most important one is that you become genuinely happy with the life you're building. I hope you don't spend your entire life chasing achievements without giving yourself time to appreciate what you already have. I hope you find a balance between ambition and contentment. Continue aiming high, but never forget to appreciate the people, experiences, and opportunities that are already part of your life.
+
+I know that the next few years will bring changes. Some might be exciting, while others might be difficult to accept. You might meet new people, experience new environments, and discover different opportunities. Your responsibilities might increase, and your decisions might become more important. But whatever happens, I hope you approach everything with patience and a willingness to learn. You don't need to know every answer immediately. Sometimes, the best thing you can do is take the next step and figure things out along the way.
+
+I want you to remember that being an adult doesn't mean you have to stop asking questions or learning from other people. There is always something new to understand, regardless of how old you become. Stay humble enough to accept corrections and confident enough to express your ideas. Never think that asking for guidance makes you weak. The people who continue learning are often the ones who continue improving.
+
+I hope this birthday reminds you to celebrate yourself, too. Celebrate the fact that you've made it through another year. Appreciate the lessons you've learned, the challenges you've overcome, and the experiences that have shaped you. You might not notice how much you've changed, but I hope you take a moment to recognize your own growth. You have come a long way, and there is still so much more waiting ahead.
+
+And lastly, I hope you never lose sight of the kind of future you want to create. Keep your dreams, even when they seem far away. Continue working for them, even when the progress is slow. Don't allow temporary setbacks to convince you that you should stop trying. Be patient with the process, trust your efforts, and remember that you are allowed to start again whenever things don't work out.
+
+Thank you for being part of my life, Martin. Thank you for the conversations, the memories, the time, and all the little things that have become part of our experiences. I appreciate having you around, and I genuinely wish to see you grow, succeed, and experience the things you've been working towards. I hope we continue to make more memories and learn more about life as we move forward.
+
+On your 18th birthday, I wish you good health, a peaceful mind, genuine happiness, success in your studies, opportunities for your future, and the strength to face whatever challenges come your way. I hope you achieve the goals you have been keeping to yourself and experience moments that remind you why all your efforts are worth it. May you have more reasons to celebrate, more lessons that make you wiser, and more experiences that help you understand yourself and the world better.
+
+Enjoy this day without worrying too much about tomorrow. Spend it with the people who matter, appreciate the little things, and make memories worth keeping. You only get to celebrate your 18th birthday once, so make sure you enjoy it.
+
+**Happy 18th birthday once again, Martin!**
+
+Welcome to adulthood. May this new chapter bring you growth, wisdom, independence, opportunities, and experiences that will help you become the person you want to be. Never rush your journey, never underestimate your abilities, and never forget to appreciate how far you've come.
+
+Here's to 18 years of life and to all the years, opportunities, achievements, and memories still waiting for you. I hope the future brings you more than you expect, and I hope someday you'll look back at this chapter and feel proud of the person you've become.
+
+Have a great birthday, Martin. You deserve a wonderful day. Happy 18th!`
+};
+
+document.getElementById("heroName").textContent = CONFIG.recipient;
+document.getElementById("senderName").textContent = CONFIG.sender;
+document.getElementById("footerName").textContent = "For " + CONFIG.recipient + " ♡";
+document.getElementById("letterText").textContent = CONFIG.letter;
+
+const music = document.getElementById("music");
+const gate = document.getElementById("musicGate");
+const musicStatus = document.getElementById("musicStatus");
+
+// Try autoplay. Browsers may block sound until the visitor taps.
+async function tryMusic() {
+  try {
+    await music.play();
+    musicStatus.textContent = "🎶 song is playing. Enjoy the surprise!";
+    return true;
+  } catch (error) {
+    musicStatus.textContent = "Tap Open Your Birthday Surprise to start the song.";
+    return false;
+  }
+}
+
+window.addEventListener("load", tryMusic);
+
+document.getElementById("enterButton").addEventListener("click", async () => {
+  gate.style.display = "none";
+  await tryMusic();
+  fireworks(4);
+});
+
+function toggleMusic() {
+  if (music.paused) {
+    tryMusic();
+  } else {
+    music.pause();
+    musicStatus.textContent = "Music paused.";
+  }
+}
+
+// Interactive birthday cake
+const cake = document.getElementById("cake");
+
+function blowCandles() {
+  cake.classList.toggle("blown");
+  const off = cake.classList.contains("blown");
+
+  document.getElementById("cakeMessage").textContent = off
+    ? "🎉 Your wish is on its way! May it come true! "
+    : "🕯️ Tap the cake to blow out the candles!";
+
+  if (off) confetti(100);
+}
+
+cake.addEventListener("click", blowCandles);
+cake.addEventListener("keydown", e => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    blowCandles();
+  }
+});
+
+function relightCake() {
+  cake.classList.remove("blown");
+  document.getElementById("cakeMessage").textContent =
+    "🕯️ Make another wish, birthday star!";
+}
+
+// Love letter
+function openLetter() {
+  document.getElementById("letterContent").classList.remove("hidden");
+  const button = document.getElementById("letterButton");
+  button.textContent = "❤️ My Letter to You";
+  button.disabled = true;
+  confetti(45);
+}
+
+// Floating hearts
+function createHeart() {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = ["💗", "💕", "♡", "💖", "♥"][Math.floor(Math.random() * 5)];
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (14 + Math.random() * 20) + "px";
+  h.style.animationDuration = (6 + Math.random() * 6) + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 13000);
+}
+
+setInterval(createHeart, 700);
+
+// Confetti
+function confetti(amount = 80) {
+  const symbols = ["💗", "❤️", "✨", "🎉", "💕"];
+
+  for (let i = 0; i < amount; i++) {
+    setTimeout(() => {
+      const el = document.createElement("div");
+      el.className = "heart";
+      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = (12 + Math.random() * 22) + "px";
+      el.style.animationDuration = (2.5 + Math.random() * 3) + "s";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 6000);
+    }, i * 12);
+  }
+}
+
+// Fireworks
+const canvas = document.getElementById("sky");
+const ctx = canvas.getContext("2d");
+let particles = [];
+let running = false;
+
+function resizeCanvas() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = innerWidth * dpr;
+  canvas.height = innerHeight * dpr;
+  canvas.style.width = innerWidth + "px";
+  canvas.style.height = innerHeight + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function burst(x, y) {
+  const color = `hsl(${Math.random() * 360},100%,70%)`;
+
+  for (let i = 0; i < 65; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 1.2 + Math.random() * 4;
+
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 55 + Math.random() * 30,
+      color,
+      size: 2 + Math.random() * 2
+    });
+  }
+
+  if (!running) {
+    running = true;
+    requestAnimationFrame(animate);
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  particles = particles.filter(p => p.life > 0);
+
+  for (const p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.035;
+    p.vx *= 0.99;
+    p.vy *= 0.99;
+    p.life--;
+
+    ctx.globalAlpha = Math.min(1, p.life / 20);
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.globalAlpha = 1;
+
+  if (particles.length) {
+    requestAnimationFrame(animate);
+  } else {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    running = false;
+  }
+}
+
+function fireworks(count = 5) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      burst(
+        innerWidth * (0.15 + Math.random() * 0.7),
+        innerHeight * (0.15 + Math.random() * 0.4)
+      );
+    }, i * 300);
+  }
+  confetti(90);
+}
+
+function startCelebration() {
+  fireworks(7);
+  document.getElementById("cake-section").scrollIntoView({behavior:"smooth"});
+}
+
+// Preview selected photos in the current browser session
+document.querySelectorAll(".photo input[type=file]").forEach(input => {
+  input.addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const img = e.target.closest(".photo").querySelector("img");
+    img.src = URL.createObjectURL(file);
+  });
+});
+</script>
+</body>
+</html>
